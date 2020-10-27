@@ -1,3 +1,17 @@
+# Copyright 2019-2020 The MediaPipe Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 """Generate MediaPipe AAR including different variants of .so in jni folder.
 
 Usage:
@@ -26,12 +40,14 @@ Finally, import the AAR into Android Studio.
 
 load("@build_bazel_rules_android//android:rules.bzl", "android_binary", "android_library")
 
-def mediapipe_aar(name, calculators = []):
+def mediapipe_aar(name, calculators = [], assets = [], assets_dir = ""):
     """Generate MediaPipe AAR.
 
     Args:
       name: the name of the AAR.
       calculators: the calculator libraries to be compiled into the .so.
+      assets: additional assets to be included into the archive.
+      assets_dir: path where the assets will the packaged.
     """
     native.cc_binary(
         name = "libmediapipe_jni.so",
@@ -129,13 +145,16 @@ cat > $(OUTS) <<EOF
             "//third_party:androidx_core",
             "//third_party:androidx_legacy_support_v4",
             "//third_party:camerax_core",
-            "//third_party:camera2",
+            "//third_party:camerax_camera2",
+            "//third_party:camerax_lifecycle",
             "@maven//:com_google_code_findbugs_jsr305",
             "@maven//:com_google_flogger_flogger",
             "@maven//:com_google_flogger_flogger_system_backend",
             "@maven//:com_google_guava_guava",
             "@maven//:androidx_lifecycle_lifecycle_common",
         ],
+        assets = assets,
+        assets_dir = assets_dir,
     )
 
     _aar_with_jni(name, name + "_android_lib")

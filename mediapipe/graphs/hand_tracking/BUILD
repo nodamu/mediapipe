@@ -17,7 +17,7 @@ load(
     "mediapipe_binary_graph",
 )
 
-licenses(["notice"])  # Apache 2.0
+licenses(["notice"])
 
 package(default_visibility = ["//visibility:public"])
 
@@ -47,6 +47,13 @@ cc_library(
         "//mediapipe/graphs/hand_tracking/subgraphs:hand_landmark_cpu",
         "//mediapipe/graphs/hand_tracking/subgraphs:renderer_cpu",
     ],
+)
+
+mediapipe_binary_graph(
+    name = "hand_tracking_desktop_live_binary_graph",
+    graph = "hand_tracking_desktop_live.pbtxt",
+    output_name = "hand_tracking_desktop_live.binarypb",
+    deps = [":desktop_tflite_calculators"],
 )
 
 cc_library(
@@ -93,6 +100,13 @@ cc_library(
         "//mediapipe/graphs/hand_tracking/subgraphs:multi_hand_landmark_gpu",
         "//mediapipe/graphs/hand_tracking/subgraphs:multi_hand_renderer_gpu",
     ],
+)
+
+mediapipe_binary_graph(
+    name = "multi_hand_tracking_desktop_live_binary_graph",
+    graph = "multi_hand_tracking_desktop_live.pbtxt",
+    output_name = "multi_hand_tracking_desktop_live.binarypb",
+    deps = [":multi_hand_desktop_tflite_calculators"],
 )
 
 mediapipe_binary_graph(

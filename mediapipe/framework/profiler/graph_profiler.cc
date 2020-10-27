@@ -204,6 +204,10 @@ void GraphProfiler::Reset() {
   Resume();
   if (is_tracing_ && IsTraceIntervalEnabled(profiler_config_, tracer()) &&
       executor != nullptr) {
+    // Inform the user via logging the path to the trace logs.
+    ASSIGN_OR_RETURN(std::string trace_log_path, GetTraceLogPath());
+    LOG(INFO) << "trace_log_path: " << trace_log_path;
+
     is_running_ = true;
     executor->Schedule([this] {
       absl::Time deadline = clock_->TimeNow() + tracer()->GetTraceLogInterval();
@@ -583,8 +587,6 @@ void AssignNodeNames(GraphProfile* profile) {
     return ::mediapipe::OkStatus();
   }
   ASSIGN_OR_RETURN(std::string trace_log_path, GetTraceLogPath());
-  // Inform the user via logging the path to the trace logs.
-  LOG(INFO) << "trace_log_path: " << trace_log_path;
   int log_interval_count = GetLogIntervalCount(profiler_config_);
   int log_file_count = GetLogFileCount(profiler_config_);
 
@@ -596,7 +598,7 @@ void AssignNodeNames(GraphProfile* profile) {
       absl::Microseconds(profiler_config_.trace_log_margin_usec());
   GraphProfile profile;
   GraphTrace* trace = profile.add_graph_trace();
-  if (!profiler_config_.trace_log_duration_events()) {
+  if (!profiler_config_.trace_log_instant_events()) {
     tracer()->GetTrace(previous_log_end_time_, end_time, trace);
   } else {
     tracer()->GetLog(previous_log_end_time_, end_time, trace);

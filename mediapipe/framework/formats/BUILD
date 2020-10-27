@@ -14,21 +14,32 @@
 #
 
 load("//mediapipe/framework/port:build_config.bzl", "mediapipe_proto_library")
+load("//mediapipe/framework:mediapipe_register_type.bzl", "mediapipe_register_type")
 
 package(
     default_visibility = ["//visibility:private"],
     features = ["-layering_check"],
 )
 
-licenses(["notice"])  # Apache 2.0
-
-exports_files(["LICENSE"])
+licenses(["notice"])
 
 mediapipe_proto_library(
     name = "detection_proto",
     srcs = ["detection.proto"],
     visibility = ["//visibility:public"],
     deps = ["//mediapipe/framework/formats:location_data_proto"],
+)
+
+mediapipe_register_type(
+    base_name = "detection",
+    include_headers = ["mediapipe/framework/formats/detection.pb.h"],
+    types = [
+        "::mediapipe::Detection",
+        "::mediapipe::DetectionList",
+        "::std::vector<::mediapipe::Detection>",
+        "::std::vector<::mediapipe::DetectionList>",
+    ],
+    deps = ["//mediapipe/framework/formats:detection_cc_proto"],
 )
 
 mediapipe_proto_library(
@@ -60,6 +71,12 @@ mediapipe_proto_library(
 mediapipe_proto_library(
     name = "time_series_header_proto",
     srcs = ["time_series_header.proto"],
+    visibility = ["//visibility:public"],
+)
+
+mediapipe_proto_library(
+    name = "image_file_properties_proto",
+    srcs = ["image_file_properties.proto"],
     visibility = ["//visibility:public"],
 )
 
@@ -95,18 +112,23 @@ cc_library(
     hdrs = ["image_frame.h"],
     visibility = ["//visibility:public"],
     deps = [
-        "//mediapipe/framework:port",
         "//mediapipe/framework/formats:image_format_cc_proto",
-        "//mediapipe/framework/port:aligned_malloc_and_free",
-        "//mediapipe/framework/port:core_proto",
-        "//mediapipe/framework/port:integral_types",
-        "//mediapipe/framework/port:logging",
-        "//mediapipe/framework/port:source_location",
         "@com_google_absl//absl/base",
         "@com_google_absl//absl/base:core_headers",
         "@com_google_absl//absl/memory",
         "@com_google_absl//absl/strings",
-    ],
+        "//mediapipe/framework:port",
+        "//mediapipe/framework/port:aligned_malloc_and_free",
+        "//mediapipe/framework/port:core_proto",
+        "//mediapipe/framework/port:integral_types",
+        "//mediapipe/framework/port:source_location",
+        "//mediapipe/framework/port:logging",
+        "//mediapipe/framework/tool:type_util",
+    ] + select({
+        "//conditions:default": [
+        ],
+        "//mediapipe/framework:disable_rtti_and_exceptions": [],
+    }),
 )
 
 cc_library(
@@ -202,6 +224,18 @@ mediapipe_proto_library(
     deps = ["//mediapipe/framework/formats:location_data_proto"],
 )
 
+mediapipe_register_type(
+    base_name = "rect",
+    include_headers = ["mediapipe/framework/formats/rect.pb.h"],
+    types = [
+        "::mediapipe::Rect",
+        "::mediapipe::NormalizedRect",
+        "::std::vector<::mediapipe::Rect>",
+        "::std::vector<::mediapipe::NormalizedRect>",
+    ],
+    deps = [":rect_cc_proto"],
+)
+
 mediapipe_proto_library(
     name = "landmark_proto",
     srcs = ["landmark.proto"],
@@ -210,9 +244,48 @@ mediapipe_proto_library(
     ],
 )
 
+mediapipe_register_type(
+    base_name = "landmark",
+    include_headers = ["mediapipe/framework/formats/landmark.pb.h"],
+    types = [
+        "::mediapipe::Landmark",
+        "::mediapipe::NormalizedLandmark",
+        "::mediapipe::NormalizedLandmarkList",
+        "::std::vector<::mediapipe::Landmark>",
+        "::std::vector<::mediapipe::NormalizedLandmark>",
+        "::std::vector<::mediapipe::NormalizedLandmarkList>",
+    ],
+    deps = [":landmark_cc_proto"],
+)
+
 # Expose the proto source files for building mediapipe AAR.
 filegroup(
     name = "protos_src",
     srcs = glob(["*.proto"]),
     visibility = ["//mediapipe:__subpackages__"],
+)
+
+cc_library(
+    name = "image_frame_pool",
+    srcs = ["image_frame_pool.cc"],
+    hdrs = ["image_frame_pool.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":image_frame",
+        "@com_google_absl//absl/memory",
+        "@com_google_absl//absl/synchronization",
+    ],
+)
+
+cc_test(
+    name = "image_frame_pool_test",
+    size = "small",
+    srcs = ["image_frame_pool_test.cc"],
+    tags = ["linux"],
+    deps = [
+        ":image_frame_pool",
+        "//mediapipe/framework/port:gtest_main",
+        "//mediapipe/framework/port:status",
+        "@com_google_absl//absl/memory",
+    ],
 )
