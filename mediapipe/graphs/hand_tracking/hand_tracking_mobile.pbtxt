@@ -78,6 +78,7 @@ node {
   output_stream: "NORM_RECT:hand_rect_from_landmarks"
   output_stream: "PRESENCE:hand_presence"
   output_stream: "HANDEDNESS:handedness"
+  output_stream: "RECOGNIZED_HAND_GESTURE:gesture_text"
 }
 
 # Caches a hand rectangle fed back from HandLandmarkSubgraph, and upon the
@@ -121,5 +122,6 @@ node {
   input_stream: "NORM_RECT:hand_rect"
   input_stream: "DETECTIONS:palm_detections"
   input_stream: "HANDEDNESS:handedness"
+  input_stream: "GESTURE_TEXT:gesture_text"
   output_stream: "IMAGE:output_video"
 }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1e71eca6-c817-4ea0-a112-77fd6cd66d53" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/WORKSPACE" beforeDir="false" afterPath="$PROJECT_DIR$/WORKSPACE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/calculators/util/BUILD" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/calculators/util/BUILD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/calculators/util/annotation_overlay_calculator.cc" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/calculators/util/annotation_overlay_calculator.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/hand_tracking_mobile.pbtxt" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/hand_tracking_mobile.pbtxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/BUILD" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/BUILD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/hand_landmark_cpu.pbtxt" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/hand_landmark_cpu.pbtxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/hand_landmark_gpu.pbtxt" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/hand_landmark_gpu.pbtxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/renderer_cpu.pbtxt" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/renderer_cpu.pbtxt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/renderer_gpu.pbtxt" beforeDir="false" afterPath="$PROJECT_DIR$/mediapipe/graphs/hand_tracking/subgraphs/renderer_gpu.pbtxt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1imws24KP9A3gba2X2FAEdixoVy" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="cf.first.check.clang-format" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e71eca6-c817-4ea0-a112-77fd6cd66d53" name="Default Changelist" comment="" />
+      <created>1602526292792</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1602526292792</updated>
+      <workItem from="1602526298948" duration="658000" />
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="449" y="187" key="SettingsEditor" timestamp="1602526471515">
+      <screen x="0" y="25" width="1920" height="1055" />
+    </state>
+    <state x="449" y="187" key="SettingsEditor/0.25.1920.1055@0.25.1920.1055" timestamp="1602526471515" />
+  </component>
+</project>

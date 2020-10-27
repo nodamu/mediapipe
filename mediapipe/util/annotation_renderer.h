@@ -77,6 +77,10 @@ class AnnotationRenderer {
   // See 'gpu_scale_factor' in annotation_overlay_calculator.proto
   void SetScaleFactor(float scale_factor);
 
+  // Draws text on output image frame
+  void DrawText(std::string text);
+
+
  private:
   // Draws a rectangle on the image as described in the annotation.
   void DrawRectangle(const RenderAnnotation& annotation);

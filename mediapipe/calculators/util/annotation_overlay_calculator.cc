@@ -48,6 +48,9 @@ constexpr char kInputVectorTag[] = "VECTOR";
 constexpr char kInputFrameTagGpu[] = "IMAGE_GPU";
 constexpr char kOutputFrameTagGpu[] = "IMAGE_GPU";
 
+constexpr char GestureTextTag[] = "GESTURE_TEXT";
+
+
 enum { ATTRIB_VERTEX, ATTRIB_TEXTURE_POSITION, NUM_ATTRIBUTES };
 
 // Round up n to next multiple of m.
@@ -169,6 +172,11 @@ REGISTER_CALCULATOR(AnnotationOverlayCalculator);
 ::mediapipe::Status AnnotationOverlayCalculator::GetContract(
     CalculatorContract* cc) {
   CHECK_GE(cc->Inputs().NumEntries(), 1);
+
+  // Check if annotation_overlay_calculator has GestureTextTag
+  RET_CHECK(cc->Inputs().HasTag(GestureTextTag));
+  // Set GestureTextTag as input stream to annotation_overlay_calculator
+  cc->Inputs().Tag(GestureTextTag).Set<std::string>();
 
   bool use_gpu = false;
 
@@ -320,6 +328,10 @@ REGISTER_CALCULATOR(AnnotationOverlayCalculator);
       }
     }
   }
+  // Directly overlay annotation over image
+  // TODO - Must create gesture text to render data calculator
+  const auto &gesture_text = cc->Inputs().Tag(GestureTextTag).Get<std::string>();
+  renderer_->DrawText(gesture_text);
 
   if (use_gpu_) {
 #if !defined(MEDIAPIPE_DISABLE_GPU)

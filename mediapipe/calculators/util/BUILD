@@ -513,6 +513,18 @@ mediapipe_proto_library(
 )
 
 mediapipe_proto_library(
+    name = "gesture_to_render_data_calculator_proto",
+    srcs = ["gesture_to_render_data_calculator.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//mediapipe/framework:calculator_options_proto",
+        "//mediapipe/framework:calculator_proto",
+        "//mediapipe/util:color_proto",
+        "//mediapipe/util:render_data_proto",
+    ],
+)
+
+mediapipe_proto_library(
     name = "thresholding_calculator_proto",
     srcs = ["thresholding_calculator.proto"],
     visibility = ["//visibility:public"],
