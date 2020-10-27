@@ -76,6 +76,7 @@ class AnnotationRenderer {
   // Should be in the range (0-1].
   // See 'gpu_scale_factor' in annotation_overlay_calculator.proto
   void SetScaleFactor(float scale_factor);
+  float GetScaleFactor() { return scale_factor_; }
 
   // Draws text on output image frame
   void DrawText(std::string text);
